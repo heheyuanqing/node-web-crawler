@@ -16,3 +16,5 @@
 &emsp;&emsp;获取网页（https://movie.douban.com/review/best/?start=0） 页面的评论的作者及评论的内容（电影名称等）
 
 &emsp;&emsp;使用superagent进行页面的获取，以及cheerio对获取到的页面进行分析，使用console输出
+
+&emsp;&emsp;通过将原先的代码进行封装，通过递归进行调用函数获取下页的内容
