@@ -1,6 +1,5 @@
 /*node的superagent和cheerio模块进行抓取分析
  * 获取多页的评论的主题和评论的连接
- * https://movie.douban.com/review/best/
  *  */
 
 var superagent = require('superagent');
@@ -18,24 +17,34 @@ function getComments(url, page) {
             }
             console.log('正在获取第'+page+'页热门评论');
 
+            var $ = cheerio.load(res.text);
+            // var all = $('.header-more');
+            // var titles = $('.title');
+            var head = $('.main-hd');
+
 
             var comment = [];
             var infors = '';
-            var $ = cheerio.load(res.text);
-            var all = $('.header-more');
 
-            all.each(function (i, item) {
-                item = $(this);
-                var items = item.find('a').text().split('\n');
+            head.each(function (i,index) {
+                index = $(this);
+
+                var title = index.find('h3').children('a').text();
+                var commentUrl = index.find('h3').children('a').attr('href');
+                var author = index.find('div').children('a').text().split('\n');
+
                 comment.push({
-                    author: items[1].trim(),
-                    title: items[2].trim()
+                    title:title,
+                    url:commentUrl,
+                    author:author[1].trim(),
+                    movie:author[2].trim()
                 });
             });
-            comment.map(function (infor) {
-                infors += infor.author + '\t评论了\t' + infor.title + '\n';
 
+            comment.map(function (infor) {
+                infors += infor.title + '\t' + infor.url + '\n' + '作者：'+infor.author + '\t影视名称：' +infor.movie + '\n';
             });
+
             console.log(infors);
 
             if (page < 20) {
@@ -47,6 +56,7 @@ function getComments(url, page) {
         });
 
 }
+
 
 function main() {
     console.log('开始爬取页面');
