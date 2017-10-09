@@ -6,6 +6,7 @@ var superagent = require('superagent');
 var cheerio = require('cheerio');
 // var express = require('express');
 // var app = express();
+var fs = require('fs');
 
 var page = 0;
 var url = 'https://movie.douban.com/review/best/?start=';
@@ -18,8 +19,6 @@ function getComments(url, page) {
             console.log('正在获取第'+page+'页热门评论');
 
             var $ = cheerio.load(res.text);
-            // var all = $('.header-more');
-            // var titles = $('.title');
             var head = $('.main-hd');
 
 
@@ -46,6 +45,14 @@ function getComments(url, page) {
             });
 
             console.log(infors);
+
+
+            fs.writeFile('result.txt',infors,function (err) {
+                if (err)
+                    throw  err;
+                else
+                    console.log('存储成功！');
+            });
 
             if (page < 20) {
                 getComments(url, (page + 20));

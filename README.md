@@ -18,3 +18,12 @@
 &emsp;&emsp;使用superagent进行页面的获取，以及cheerio对获取到的页面进行分析，使用console输出
 
 &emsp;&emsp;通过将原先的代码进行封装，通过递归进行调用函数获取下页的内容
+
+&emsp;&emsp;
+
+2017-10-09
+&emsp;&emsp;
+
+&emsp;&emsp;对0929写的代码进行修改，使其在获取评论内容标题时并获取评论页面的链接，
+
+&emsp;&emsp;通过fs模块将获取的内容存储在本地txt文件中
