@@ -4,8 +4,6 @@
 
 var superagent = require('superagent');
 var cheerio = require('cheerio');
-// var express = require('express');
-// var app = express();
 var fs = require('fs');
 
 var page = 0;
@@ -16,7 +14,7 @@ function getComments(url, page) {
             if (err) {
                 return console.error(err);
             }
-            console.log('正在获取第'+page+'页热门评论');
+            console.log('正在获取第' + page + '页热门评论');
 
             var $ = cheerio.load(res.text);
             var head = $('.main-hd');
@@ -25,7 +23,7 @@ function getComments(url, page) {
             var comment = [];
             var infors = '';
 
-            head.each(function (i,index) {
+            head.each(function (i, index) {
                 index = $(this);
 
                 var title = index.find('h3').children('a').text();
@@ -33,25 +31,40 @@ function getComments(url, page) {
                 var author = index.find('div').children('a').text().split('\n');
 
                 comment.push({
-                    title:title,
-                    url:commentUrl,
-                    author:author[1].trim(),
-                    movie:author[2].trim()
+                    title: title,
+                    url: commentUrl,
+                    author: author[1].trim(),
+                    movie: author[2].trim()
                 });
             });
 
             comment.map(function (infor) {
-                infors += infor.title + '\t' + infor.url + '\n' + '作者：'+infor.author + '\t影视名称：' +infor.movie + '\n';
+                infors += infor.title + '\t' + infor.url + '\n' + '作者：' + infor.author + '\t影视名称：' + infor.movie + '\n';
             });
 
             console.log(infors);
 
+            var flag = 0;
+            //打开文件
 
-            fs.writeFile('result.txt',infors,function (err) {
+            //写入文件
+
+
+           /* fs.writeFile('result.txt', infors, function (err) {
                 if (err)
                     throw  err;
                 else
                     console.log('存储成功！');
+            });
+
+         */
+            fs.appendFile('result.txt',infors,function (err) {
+                if(err){
+                    throw err;
+                }
+                else
+                    console.log('存储成功');
+
             });
 
             if (page < 20) {
