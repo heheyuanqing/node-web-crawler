@@ -27,3 +27,12 @@
 &emsp;&emsp;对0929写的代码进行修改，使其在获取评论内容标题时并获取评论页面的链接，
 
 &emsp;&emsp;通过fs模块将获取的内容存储在本地txt文件中
+
+&emsp;&emsp;
+
+2017-10-10
+&emsp;&emsp;
+
+&emsp;&emsp;将通过fs模块进行写入文件的部分改为追加写入
+
+&emsp;&emsp;尝试使用request模块进行获取网页h
