@@ -39,8 +39,19 @@ function outputImg(html) {
     writeDouban(content);
 
 }
+function writeDouban(content){
+    var ws = fs.createWriteStream('douban-img.txt');
+    ws.write(content,'UTF8');
+    ws.end();
+    ws.on('finish',function () {
+        console.log('写入完成');
+    });
+    ws.on('erro',function (err) {
+        console.log(err.stack);
+    });
+}
 
-function writeDouban(content) {
+/*function writeDouban(content) {
     fs.appendFile('douban-book.txt',content,function (err) {
         if(err){
             throw err;
@@ -49,7 +60,8 @@ function writeDouban(content) {
             console.log('写入文件成功');
         }
     });
-}
+}*/
+
 
 
 
