@@ -35,4 +35,11 @@
 
 &emsp;&emsp;将通过fs模块进行写入文件的部分改为追加写入
 
-&emsp;&emsp;尝试使用request模块进行获取网页h
+&emsp;&emsp;尝试使用request模块进行获取网页
+
+&emsp;&emsp;
+
+2017-10-11
+&emsp;&emsp;
+
+&emsp;&emsp;使用流将获取到的内容进行写入文件
